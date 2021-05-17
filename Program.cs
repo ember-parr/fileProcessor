@@ -51,6 +51,7 @@ namespace fileProcessor
             var fileStream = File.Open(filePath, FileMode.Open);
             var md5 = System.Security.Cryptography.MD5.Create();
             var md5Bytes = md5.ComputeHash(fileStream);
+            fileStream.Dispose();
             return BitConverter.ToString(md5Bytes);
         }
     }
