@@ -14,7 +14,7 @@ namespace fileProcessor
                 var metadataFilePath = Path.Combine(subfolder, "metadata.json");
                 Console.WriteLine($"Reading {metadataFilePath}");
             // extract info from metadata file, including audio file info
-
+                var metadataFileStream = File.Open(metadataFilePath, FileMode.Open);
             // for each audio file: 
             // -- get absolute path
             // -- verify the checksum

@@ -8,4 +8,5 @@ public class Metadata {
     public string Recepient { get; set; }
     public DateTime Timestamp { get; set; }
     public List<string> Tags { get; set; } 
+    public AudioFile File { get; set; }
 }
