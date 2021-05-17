@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Json;
+
 
 namespace fileProcessor
 {
@@ -14,7 +17,10 @@ namespace fileProcessor
                 var metadataFilePath = Path.Combine(subfolder, "metadata.json");
                 Console.WriteLine($"Reading {metadataFilePath}");
             // extract info from metadata file, including audio file info
-
+                var metadataFileStream = File.Open(metadataFilePath, FileMode.Open);
+                var serializer = new DataContractJsonSerializer(typeof(List<Metadata>));
+                Console.WriteLine($"Seralized: {serializer}");
+                
             // for each audio file: 
             // -- get absolute path
             // -- verify the checksum
