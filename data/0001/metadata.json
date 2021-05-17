@@ -1,0 +1,36 @@
+[
+    {
+        "DateRecorded": "2017-03-05T03:43:09Z",
+        "File": {
+            "FileName": "01.WAV",
+            "Md5Checksum": "b3c44ad9c3d4754ef540ff5331e8b21d"
+        },
+        "Patient": "Wesley Arthur",
+        "Practitioner": "Dr. Joon Lee",
+        "Tags": [
+            "new patient"
+        ]
+    },
+    {
+        "DateRecorded": "2017-03-05T12:14:01Z",
+        "File": {
+            "FileName": "02.WAV",
+            "Md5Checksum": "f8541bb5f315b9c8932b37efa663a49d"
+        },
+        "Patient": "Sheila Arbee-Gardner",
+        "Practitioner": "Dr. Leslie Epstein",
+        "Tags": []
+    },
+    {
+        "DateRecorded": "2017-03-05T03:09:04Z",
+        "File": {
+            "FileName": "03.WAV",
+            "Md5Checksum": "2f2cd6dc19e57e60b1975483c0781395"
+        },
+        "Patient": "Gertrude Rashana",
+        "Practitioner": "Dr. Paula Long",
+        "Tags": [
+            "urgent"
+        ]
+    }
+]

@@ -1,0 +1,24 @@
+[
+    {
+        "DateRecorded": "2017-03-05T23:55:21Z",
+        "File": {
+            "FileName": "01.WAV",
+            "Md5Checksum": "09b839d41f4e4a38d7dbd2a18f3137bd"
+        },
+        "Patient": "James King",
+        "Practitioner": "Dr. Robert Nagoya",
+        "Tags": []
+    },
+    {
+        "DateRecorded": "2017-03-05T09:03:45Z",
+        "File": {
+            "FileName": "02.WAV",
+            "Md5Checksum": "f99793468f05930b874668eed72ab46e"
+        },
+        "Patient": "Tristan Weeks",
+        "Practitioner": "Dr. Helen Johnson",
+        "Tags": [
+            "urgent"
+        ]
+    }
+]
