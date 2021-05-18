@@ -14,3 +14,6 @@ Self contained .NET Core application to compress audio files and assign file spe
 
 ## Tech Used: 
 - C# and .NET Core
+- File I/O Compression
+- JSON Serialization
+- Cryptography (MD5 Hashing)
