@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
@@ -11,36 +12,55 @@ namespace fileProcessor
     {
         static void Main(string[] args)
         {
-            // we need to iterate through files in uploaded folder
+            // iterate through files in uploaded folder
             foreach (var subfolder in Directory.GetDirectories("./data")) 
             {
-            // get metadata file
+                // get metadata file
                 var metadataFilePath = Path.Combine(subfolder, "metadata.json");
                 Console.WriteLine($"Reading {metadataFilePath}");
 
-            // extract info from metadata file, including audio file info
+                // extract info from metadata file, including audio file info
                 var metadataCollection = GetMetadata(metadataFilePath);
                 
-            // for each audio file: 
-            // -- get absolute path
-            // -- verify the checksum
-            // -- generate unique identifier 
-            // -- compress it
-            // -- create a standalone metadata file
+                // for each audio file in the folder... 
                 foreach(var metadata in metadataCollection)
                 {
+                    // get the file's absolute path
                     var audioFilePath = Path.Combine(subfolder, metadata.File.FileName);
                     Console.WriteLine($"audioFilePath: {audioFilePath}");
+                    
+                    // verify the checksum of the file
                     var md5Checksum = GetChecksum(audioFilePath);
                     if(md5Checksum.Replace("-", "").ToLower() != metadata.File.Md5Checksum)
                     {
                         throw new Exception("Checksum does not match! CODE RED... something's wrong");
                     }
 
+                    // generates unique file name 
                     var uniqueFileName = Guid.NewGuid();
-                    metadata.File.FileName = uniqueFileName + ".WAV";
+                    metadata.File.FileName = uniqueFileName + ".WAV"; 
+
+                    // generates new path for file -- directing to folder 'ready_to_send' 
+                    var newPath = Path.Combine("./ready_to_send", uniqueFileName + ".WAV");
+
+                    // compress the audio file
+                    CreateCompressedFile(audioFilePath, newPath);
+                    // create a standalone metadata file to accompany the audio file. 
                 }
             }
+        }
+
+        static void CreateCompressedFile(string inputFilePath, string outputFilePath)
+        {
+            outputFilePath += ".gz";
+            Console.WriteLine($"Creating: {outputFilePath}");
+
+            var inputFileStream = File.Open(inputFilePath, FileMode.Open);
+            var outputFileStream = File.Create(outputFilePath);
+            var gzipFileStream = new GZipStream(outputFileStream, CompressionLevel.Optimal);
+
+            inputFileStream.CopyTo(gzipFileStream);
+
         }
 
         static List<Metadata> GetMetadata(string metadataFilePath) 
