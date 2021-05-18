@@ -82,5 +82,16 @@ namespace fileProcessor
             fileStream.Dispose();
             return BitConverter.ToString(md5Bytes);
         }
+
+        static List<Metadata> SaveSingleMetadata(Metadata metadata, string metadataFilePath) 
+        {
+            var metadataFileStream = File.Open(metadataFilePath, FileMode.Create);
+            var settings = new DataContractJsonSerializerSettings
+            {
+                DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            };
+            var serializer = new DataContractJsonSerializer(typeof(List<Metadata>), settings);
+            return (List<Metadata>)serializer.ReadObject(metadataFileStream);
+        }
     }
 }
