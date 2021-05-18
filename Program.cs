@@ -36,6 +36,9 @@ namespace fileProcessor
                     {
                         throw new Exception("Checksum does not match! CODE RED... something's wrong");
                     }
+
+                    var uniqueFileName = Guid.NewGuid();
+                    metadata.File.FileName = uniqueFileName + ".WAV";
                 }
             }
         }
