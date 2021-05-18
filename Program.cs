@@ -45,7 +45,9 @@ namespace fileProcessor
 
                     // compress the audio file
                     CreateCompressedFile(audioFilePath, newPath);
+
                     // create a standalone metadata file to accompany the audio file. 
+                    SaveSingleMetadata(metadata, newPath + ".json");
                 }
             }
         }
@@ -81,6 +83,18 @@ namespace fileProcessor
             var md5Bytes = md5.ComputeHash(fileStream);
             fileStream.Dispose();
             return BitConverter.ToString(md5Bytes);
+        }
+
+        static void SaveSingleMetadata(Metadata metadata, string metadataFilePath) 
+        {
+            Console.WriteLine($"Creating: {metadataFilePath}");
+            var metadataFileStream = File.Open(metadataFilePath, FileMode.Create);
+            var settings = new DataContractJsonSerializerSettings
+            {
+                DateTimeFormat = new DateTimeFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+            };
+            var serializer = new DataContractJsonSerializer(typeof(Metadata), settings);
+            serializer.WriteObject(metadataFileStream, metadata);
         }
     }
 }
