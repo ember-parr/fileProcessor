@@ -45,7 +45,9 @@ namespace fileProcessor
 
                     // compress the audio file
                     CreateCompressedFile(audioFilePath, newPath);
+
                     // create a standalone metadata file to accompany the audio file. 
+                    SaveSingleMetadata(metadata, newPath + ".json");
                 }
             }
         }
@@ -85,6 +87,7 @@ namespace fileProcessor
 
         static void SaveSingleMetadata(Metadata metadata, string metadataFilePath) 
         {
+            Console.WriteLine($"Creating: {metadataFilePath}");
             var metadataFileStream = File.Open(metadataFilePath, FileMode.Create);
             var settings = new DataContractJsonSerializerSettings
             {
