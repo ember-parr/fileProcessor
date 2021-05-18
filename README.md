@@ -1,4 +1,4 @@
-# fileProcessor
+# File Processor
 
 
 Self contained .NET Core application to compress audio files and assign file specific metadata. 
