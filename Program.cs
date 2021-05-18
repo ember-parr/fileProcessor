@@ -30,7 +30,12 @@ namespace fileProcessor
                 foreach(var metadata in metadataCollection)
                 {
                     var audioFilePath = Path.Combine(subfolder, metadata.File.FileName);
+                    Console.WriteLine($"audioFilePath: {audioFilePath}");
                     var md5Checksum = GetChecksum(audioFilePath);
+                    if(md5Checksum.Replace("-", "").ToLower() != metadata.File.Md5Checksum)
+                    {
+                        throw new Exception("Checksum does not match! CODE RED... something's wrong");
+                    }
                 }
             }
         }
